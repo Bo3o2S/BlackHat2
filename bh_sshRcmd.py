@@ -4,8 +4,9 @@ import subprocess
 
 def ssh_command(ip, user, passwd, command):
     client = paramiko.SSHClient()
-    #client.load_host_keys('/home/mjlee/.ssh/known_hosts')
+    client.load_host_keys('/home/mjlee/.ssh/id_rsa')
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    # client.connect(ip, username=user, password=passwd, allow_agent=True, look_for_keys=True)
     client.connect(ip, username=user, password=passwd)
     ssh_session = client.get_transport().open_session()
     if ssh_session.active:
@@ -21,3 +22,5 @@ def ssh_command(ip, user, passwd, command):
         client.close()
     return
 ssh_command('127.0.0.1', 'mjlee', 'mjlee', 'ClientConnected')
+
+

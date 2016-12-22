@@ -6,6 +6,12 @@ import sys
 host_key = paramiko.RSAKey(filename='/etc/ssh/ssh_host_rsa_key')
 
 class Server(paramiko.ServerInterface):
+    data = (b'AAAAB3NzaC1yc2EAAAADAQABAAABAQDJSfJAOSf5Hl8AIJaZU1DFDXSkEaci'
+            b'BDZTMd2WlhNaGWajADvFDKSjI0Wlp2tpnXmkAuKKuB9cd2fT5EMCNny3BW/5'
+            b'p/pmi9TadbP9nwpOJmfH7j0TLRnG2Fhn4CxDOY3RLQIf5nZtk0bTaY4168bG'
+            b'G+c4B75sRS4q5/shGs0LELu8NOhdEqbmVteL/51K4rle5N354Fatbnrlpk7j'
+            b'JBaKWSLJ8Jk9C5dkNHCtjb/pQ8gt9O6tst7IasU32pB0mWIQWEjd/ZtqZSSq'
+            b'uXTq5Xbby+H6BIkbuEKGLzbQc+dwgflwJvZ6MIvbQZR5/wFD41jPtEdF/JlZKeUX8gdMylJ9')
     def _init_(self):
         self.event = threading.Event()
     def check_channel_request(self, kind, chanid):
@@ -16,6 +22,11 @@ class Server(paramiko.ServerInterface):
         if (username == 'mjlee') and (password == 'mjlee'):
             return paramiko.AUTH_SUCCESSFUL
         return paramiko.AUTH_FAILED
+    # def check_auth_publickey(self, username, key):
+    #   if(username == 'mjlee') and (key == self.good)
+    #       return paramiko.AUTH_SUCCESSFUL
+    #   return paramiko.AUTH_FAILED
+
 server = '127.0.0.1'
 ssh_port = 22
 
